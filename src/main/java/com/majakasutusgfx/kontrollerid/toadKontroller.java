@@ -122,7 +122,11 @@ public class toadKontroller {
     @FXML
     private void tagasi() {
         try {
-            Parent view = FXMLLoader.load(getClass().getResource("/com/majakasutusgfx/PeaVaade.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/majakasutusgfx/PeaVaade.fxml"));
+            Parent view = loader.load();
+            MajaKasutusController majaKasRetController = loader.getController();
+            majaKasRetController.setToad(toad);
+
             rootPane.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();

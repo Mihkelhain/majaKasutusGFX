@@ -70,6 +70,11 @@ public class MajaKasutusController {
         //TODO ye ma ei teinud seda veel
     }
 
+    public void setToad(ObservableList<Tuba> toad) {
+        this.toad = toad;
+        toaComboBox.setItems(this.toad);
+    }
+
     @FXML
     private void näitaToadVaade() {
         try {
@@ -82,7 +87,6 @@ public class MajaKasutusController {
             rootPane.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
-            näitaTeavitus("Ei saanud vahetada vaadet");
         }
     }
 }
