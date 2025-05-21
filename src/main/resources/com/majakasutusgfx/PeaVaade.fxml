@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.majakasutusgfx.kontrollerid.MajaKasutusController" spacing="10"
+      style="-fx-padding: 10;">
+
+    <Label text="Majakasutuse Haldamine" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Button text="Salvesta enda toad" onAction="#salvestaFail"/>
+    <Button text="Lae enda toad" onAction="#laeFail"/>
+    <Separator/>
+
+    <Label text="Tubade haldamine" style="-fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="toaNimi" promptText="Sisesta toa nimi"/>
+        <Button text="Loo tuba" onAction="#looTuba"/>
+    </HBox>
+
+    <Label text="Olemasolevad toad:"/>
+    <ListView fx:id="toaList" VBox.vgrow="ALWAYS"/>
+    <HBox>
+    <Label fx:id="dropDownTuba" text="Tuba: " />
+    <ComboBox fx:id="toaComboBox" promptText="Vali tuba"/>
+        <Button text="Vaata tubasid" onAction="#näitaToadVaade"/>
+    </HBox>
+
+</VBox>

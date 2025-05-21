@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.majakasutusgfx.kontrollerid.toadKontroller"
+      spacing="10" style="-fx-padding: 10;">
+
+    <Label text="Toad:"/>
+    <ComboBox fx:id="toaComboBox" promptText="Vali tuba"/>
+
+    <Label text="Loo uus tuba:" style="-fx-font-weight: bold;"/>
+    <HBox spacing="10">
+        <TextField fx:id="toaNimi" promptText="Sisesta toa nimi"/>
+        <Button text="Loo tuba" onAction="#looTuba"/>
+    </HBox>
+
+    <Label fx:id="dropDownTuba" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Label text="Selle toa masinad:"/>
+    <TableView fx:id="masinadTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="Masina nimi" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="nimi"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Brand" prefWidth="120">
+                <cellValueFactory><PropertyValueFactory property="brand"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Energia efektiivsus" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="energiaEfektiivsus"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="kWh" prefWidth="80">
+                <cellValueFactory><PropertyValueFactory property="kWh"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <Separator/>
+
+    <Label text="Lisa uus masin:" style="-fx-font-weight: bold;"/>
+    <GridPane hgap="10" vgap="10">
+        <Label text="Masina nimi:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="masinaNimi" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Brand:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="brand" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="energiaEfektiivisus:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="energiaEfektiivisus" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="kWh:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="kWH" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <Button text="Lisa masin" onAction="#looMasin"/>
+    <Button text="Tagasi" onAction="#tagasi"/>
+</VBox>
