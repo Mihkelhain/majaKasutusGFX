@@ -11,7 +11,6 @@ public class Tuba {
     private String nimi;
     public Tuba(String nimi) {
         this.nimi = nimi;
-        this.masinadToas = masinadToas;
     }
 
     public void lisaMasin(Masin masin){
@@ -30,6 +29,10 @@ public class Tuba {
 
     public String getNimi() {
         return nimi;
+    }
+
+    public List<Masin> getMasinadToas() {
+        return masinadToas;
     }
 
     @Override

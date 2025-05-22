@@ -40,6 +40,6 @@ public class Kodumasin implements Masin {
     }
     @Override
     public String toString() {
-        return nimetus + " " + brand + ", energiaefektiivsuse tähis on " + energiaEfektiivsus + ", kasutab " + kwH +" kilovatt-tundi elektrit";
+        return nimetus + "," + brand + "," + energiaEfektiivsus + "," + kwH;
     }
 }

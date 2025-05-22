@@ -1,5 +1,7 @@
 package com.majakasutusgfx.kontrollerid;
 
+import com.majakasutusgfx.mudelid.Kodumasin;
+import com.majakasutusgfx.mudelid.Masin;
 import com.majakasutusgfx.mudelid.Tuba;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MajaKasutusController {
     @FXML
@@ -61,13 +66,59 @@ public class MajaKasutusController {
         alert.setContentText(sisu);
         alert.showAndWait();
     }
-
-    public void salvestaFail() {
-        //TODO ye ma ei teinud seda ka veel
+    //TODO Errori jaoks proper throw
+    @FXML
+    public void salvestaFail() throws IOException {
+        List<Tuba> tubad =  toad;
+        try(BufferedWriter f = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("MKsave.txt"),"UTF-8"))){
+            for (Tuba MajTuba : tubad) {
+                List<Masin> masinad = MajTuba.getMasinadToas();
+                f.write(MajTuba.toString()+ ";");
+                f.write(masinad.toArray().length + ";");
+                for (Masin masin : masinad){
+                    f.write(masin.toString() + ";");
+                }
+                f.newLine();
+            }
+        näitaTeavitus("Fail salvestati ära");
+    }
+        catch(Exception e){
+            näitaTeavitus("Fail ei saanud salvestatud" + e.getMessage());
+        }
     }
 
-    public void laeFail() {
-        //TODO ye ma ei teinud seda veel
+
+    public void laeFail() throws IOException {
+        try(BufferedReader f = new BufferedReader(new FileReader("MKsave.txt"))){
+            String line;
+            while((line = f.readLine()) != null){
+                String[] osad = line.split(";");
+                for (Tuba checkTuba : toad) {
+                    if (osad[0].equals(checkTuba.getNimi())) {
+                        toad.remove(checkTuba);
+                    }
+                }
+                Tuba tuba = new Tuba(osad[0]);
+
+                int masinArv = Integer.parseInt(osad[1]);
+                if(masinArv == 0){
+                    toad.add(tuba);
+                    continue;}
+                for (int i = 2; i < masinArv + 2; i++) {
+                    String[] mas = osad[i].split(",");
+                    String nimi = mas[0];
+                    String brand = mas[1];
+                    String energEff = mas[2];
+                    double kiloWH = Double.parseDouble(mas[3]);
+                    Kodumasin kodumasin = new Kodumasin(nimi, brand, energEff, kiloWH);
+                    tuba.lisaMasin(kodumasin);
+                    toad.add(tuba);
+                }
+
+            }
+            }
+
+
     }
 
     public void setToad(ObservableList<Tuba> toad) {
@@ -86,7 +137,7 @@ public class MajaKasutusController {
 
             rootPane.getChildren().setAll(view);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 }
